@@ -99,6 +99,8 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 
 **Expected result:** A stable navigation skeleton, with obvious placeholders for features not built yet.
 
+**Implementation checkpoint (2026-11-05):** Phase 4 skeleton implemented; Android/iOS bundle compilation, Expo dependency checks and router transition checks passed. Physical Expo Go testing remains pending, so Phase 4 is not marked complete. `RootNavigator` uses a local, memory-only development preview flag guarded by `__DEV__`; Phase 7 must replace it with `AuthContext`. See [the verification record](PHASE_4_VERIFICATION.md) for the hierarchy, changed files, commands and device walkthrough. Do not proceed to Phase 5 automatically.
+
 **Verification checklist**
 - [ ] All primary tabs and representative stack routes open and return correctly.
 - [ ] No duplicated/conflicting navigation headers or broken back behavior.

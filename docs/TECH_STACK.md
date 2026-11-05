@@ -62,6 +62,8 @@ npm install react-native-sse
 
 Prefer `npx expo install` for Expo/native packages so versions match the chosen SDK. Avoid hand-pinning versions in this document before the SDK is selected.
 
+**Phase 4 installed versions (2026-11-05):** React Navigation native 7.5.1, native-stack 7.21.0, bottom-tabs 7.21.0; react-native-screens 4.30.1 and react-native-safe-area-context 5.11.1. These packages were already installed when Phase 4 implementation began; no dependency files were changed during this task. Expo dependency validation and Expo Doctor (20/20) passed. PocketBase integration remains deferred. See `docs/PHASE_4_VERIFICATION.md` for navigation checks and pending device tests.
+
 ## 4. PocketBase setup and integration
 
 - Use the downloaded **PocketBase Windows binary**, with a local `pb_data` directory and dashboard. The app communicates directly with the PocketBase server using the SDK and its REST APIs.
