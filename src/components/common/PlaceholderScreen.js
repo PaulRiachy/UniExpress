@@ -1,7 +1,7 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function PlaceholderScreen({ title, description, actions = [] }) {
+export default function PlaceholderScreen({ title, description, actions = [], headerContent }) {
   const insets = useSafeAreaInsets();
 
   // Navigator headers protect the top; inset the content at the sides and bottom.
@@ -23,14 +23,17 @@ export default function PlaceholderScreen({ title, description, actions = [] }) 
           <Text style={styles.caption}>UNIEXPRESS / NAVIGATION PREVIEW</Text>
           <Text accessibilityRole="header" style={styles.title}>{title}</Text>
           <Text style={styles.description}>{description}</Text>
-          <Text style={styles.note}>Phase 4 placeholder. Features are not connected yet.</Text>
+          <Text style={styles.note}>Application features are still placeholders.</Text>
+          {headerContent}
         </View>
       }
       renderItem={({ item }) => (
         <Pressable
           accessibilityRole="button"
+          accessibilityState={{ disabled: Boolean(item.disabled) }}
+          disabled={item.disabled}
           onPress={item.onPress}
-          style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+          style={({ pressed }) => [styles.button, (pressed || item.disabled) && styles.pressed]}
         >
           <Text style={styles.buttonText}>{item.label}</Text>
         </Pressable>

@@ -1,20 +1,20 @@
 # UniExpress — Technology Stack & Development Setup
 
 **Status:** Approved technology reference · **Reviewed:** 2026-11-04  
-**Source:** *CampusGo – Antonine Campus Delivery Application* project brief (`docs/Project_CampusGo_Campus_Delivery.pdf`; former project name), pp. 1–3, 5.  
+**Source:** _CampusGo – Antonine Campus Delivery Application_ project brief (`docs/Project_CampusGo_Campus_Delivery.pdf`; former project name), pp. 1–3, 5.  
 **Scope:** Student-focused React Native mobile app for Université Antonine. This file specifies tools; it does **not** initialize a project.
 
 ## 1. Confirmed technology decisions
 
-| Area | Choice | Role |
-|---|---|---|
-| Mobile UI | **React Native + Expo**, **JavaScript** | Android/iOS application; functional components, Hooks and `FlatList` |
-| Navigation | **React Navigation** | Bottom tabs and native-stack screens, as required by the brief |
-| Backend | **PocketBase** | SQLite-backed collections, email/password authentication, REST API, admin dashboard |
-| Client integration | **PocketBase JavaScript SDK** (`pocketbase`) | Call PocketBase directly from the mobile app; no Express proxy required |
-| Development | **Windows + VS Code + Codex extension** | Editing and assisted development |
-| Version control | **Git + GitHub** | Collaboration and repository history |
-| Device testing | **Expo Go on a real phone** | Rapid development and required live demonstration |
+| Area               | Choice                                       | Role                                                                                |
+| ------------------ | -------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Mobile UI          | **React Native + Expo**, **JavaScript**      | Android/iOS application; functional components, Hooks and `FlatList`                |
+| Navigation         | **React Navigation**                         | Bottom tabs and native-stack screens, as required by the brief                      |
+| Backend            | **PocketBase V.0.41.1**                      | SQLite-backed collections, email/password authentication, REST API, admin dashboard |
+| Client integration | **PocketBase JavaScript SDK** (`pocketbase`) | Call PocketBase directly from the mobile app; no Express proxy required             |
+| Development        | **Windows + VS Code + Codex extension**      | Editing and assisted development                                                    |
+| Version control    | **Git + GitHub**                             | Collaboration and repository history                                                |
+| Device testing     | **Expo Go on a real phone**                  | Rapid development and required live demonstration                                   |
 
 **Approval:** The instructor has confirmed and approved **PocketBase** for UniExpress. No additional approval checkpoint is needed before development. The original brief remains the functional requirements reference.
 
@@ -35,17 +35,17 @@
 
 Install **later, inside the Expo project**, not during documentation/setup review:
 
-| Package | Required? | Purpose |
-|---|---|---|
-| `expo`, `react`, `react-native` | Yes — supplied by Expo template | App runtime, components and Hooks; use Expo-compatible versions |
-| `@react-navigation/native` | Yes | Navigation container and core navigation API |
-| `@react-navigation/native-stack` | Yes | Native-feeling stack navigation |
-| `@react-navigation/bottom-tabs` | Yes | Required bottom-tab navigation |
-| `react-native-screens` | Yes | React Navigation screen integration |
-| `react-native-safe-area-context` | Yes | Safe positioning around notches/system bars |
-| `pocketbase` | Yes | Official SDK for authentication and collections |
-| `expo-secure-store` | **Conditional / recommended** | Securely persist a *small PocketBase auth token* between launches; not for cart, orders or other application data |
-| `react-native-sse` | **Only if realtime subscriptions are implemented** | React Native `EventSource` implementation for PocketBase realtime; polling or ordinary fetches do not require it |
+| Package                          | Required?                                          | Purpose                                                                                                           |
+| -------------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `expo`, `react`, `react-native`  | Yes — supplied by Expo template                    | App runtime, components and Hooks; use Expo-compatible versions                                                   |
+| `@react-navigation/native`       | Yes                                                | Navigation container and core navigation API                                                                      |
+| `@react-navigation/native-stack` | Yes                                                | Native-feeling stack navigation                                                                                   |
+| `@react-navigation/bottom-tabs`  | Yes                                                | Required bottom-tab navigation                                                                                    |
+| `react-native-screens`           | Yes                                                | React Navigation screen integration                                                                               |
+| `react-native-safe-area-context` | Yes                                                | Safe positioning around notches/system bars                                                                       |
+| `pocketbase`                     | Yes                                                | Official SDK for authentication and collections                                                                   |
+| `expo-secure-store`              | **Conditional / recommended**                      | Securely persist a _small PocketBase auth token_ between launches; not for cart, orders or other application data |
+| `react-native-sse`               | **Only if realtime subscriptions are implemented** | React Native `EventSource` implementation for PocketBase realtime; polling or ordinary fetches do not require it  |
 
 Use built-in `fetch`/SDK, `useState`, `useEffect`, `FlatList`, React Context only if shared state warrants it, and built-in form components initially. **Do not add** Axios, UI kits, form libraries or state-management libraries without an identified need. Stock/store images can use React Native `Image` and network URLs.
 
@@ -62,7 +62,9 @@ npm install react-native-sse
 
 Prefer `npx expo install` for Expo/native packages so versions match the chosen SDK. Avoid hand-pinning versions in this document before the SDK is selected.
 
-**Phase 4 installed versions (2026-11-05):** React Navigation native 7.5.1, native-stack 7.21.0, bottom-tabs 7.21.0; react-native-screens 4.30.1 and react-native-safe-area-context 5.11.1. These packages were already installed when Phase 4 implementation began; no dependency files were changed during this task. Expo dependency validation and Expo Doctor (20/20) passed. PocketBase integration remains deferred. See `docs/PHASE_4_VERIFICATION.md` for navigation checks and pending device tests.
+**Phase 4 installed versions (2026-11-05):** React Navigation native 7.5.1, native-stack 7.21.0, bottom-tabs 7.21.0; react-native-screens 4.30.1 and react-native-safe-area-context 5.11.1. These packages were already installed when Phase 4 implementation began; no dependency files were changed during that task. Expo dependency validation and Expo Doctor (20/20) passed. See `docs/PHASE_4_VERIFICATION.md` for navigation checks and pending device tests.
+
+**Current Phase 5 checkpoint (2026-11-08):** PocketBase JavaScript SDK 0.28.2 was already installed. `src/services/pocketbase.js` now owns the sole SDK client with a memory-only store and an abortable, eight-second health check. Home consumes only the service function for a temporary connectivity indicator. No new dependencies, collections or authentication features were added. PC loopback/LAN and real SDK health checks passed; phone connectivity remains unverified. See [Phase 5 verification](PHASE_5_VERIFICATION.md).
 
 ## 4. PocketBase setup and integration
 
@@ -82,6 +84,7 @@ Prefer `npx expo install` for Expo/native packages so versions match the chosen 
 - The schema should cover **users, stores, products, buildings, delivery slots, orders/order items, wallet transactions, saved delivery locations and ratings**, as needed by the brief. Minimum dataset in the brief: **4 stores, 25 products, 6 buildings, 5 delivery slots**. Plan seed/import data and commit safe schema migrations (`pb_migrations`); **never commit `pb_data`**.
 - The printing flow in the brief uses a **simulated document name**, not actual file upload. Do not add document-picker/upload dependencies unless that requirement changes.
 - Local PocketBase data lives on the developer PC; for multi-device/remote demonstrations choose a reachable **hosted HTTPS PocketBase instance** later. Hosting provider, domain and backup policy are **undecided**. PocketBase versions prior to 1.0 may include breaking changes; record and pin a tested backend version.
+- Pinned PocketBase version: 0.41.1 (Windows). Verified using pocketbase.exe --version and pocketbase.exe serve --help on November 6, 2026.
 
 ## 5. Physical phone testing (Windows + Expo Go)
 
@@ -137,15 +140,15 @@ npx expo install --check
 
 ## 8. Open decisions and documents to align
 
-| Decision / discrepancy | Status / next action |
-|---|---|
-| **Brief conflict** | The original brief (p. 2) explicitly requires local JSON/mock API and AsyncStorage for cart, wallet and orders, and says no real backend is required. **Instructor approval to use PocketBase is confirmed.** Proceed with PocketBase as the backend and the documented no-AsyncStorage architecture. Retain the required minimum sample dataset and simulated payment/tracking behavior. If the approval did not explicitly cover replacing AsyncStorage, clarify that specific grading requirement without delaying PocketBase implementation. |
-| Expo SDK & template | **Installed 2026-11-05:** Expo 58.0.23 (SDK 58), React 19.3.0, React Native 0.88.1; JavaScript blank-style starter. Dependency check and Expo Doctor (20/20) passed. Physical Expo Go compatibility is still unverified. Match the actual Expo Go version and choose a **plain JavaScript / React Navigation** starting point rather than the default Expo Router architecture. |
-| Phone platform | **Undecided.** Android recommended for simplest Windows setup; confirm exact device. |
-| PocketBase deployment | **Undecided.** LAN-hosted on Windows for early development; decide remote HTTPS demo hosting if needed. |
-| Session persistence | **Undecided.** In-memory session needs no storage library; `expo-secure-store` is only for persistent auth tokens if selected. |
-| Real-time tracking | The brief specifies **simulated timer-driven statuses**. No realtime/SSE package is needed for the initial implementation. |
-| Wallet integrity | Simulated academic prototype only until server-side transactional enforcement is defined. |
+| Decision / discrepancy | Status / next action                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Brief conflict**     | The original brief (p. 2) explicitly requires local JSON/mock API and AsyncStorage for cart, wallet and orders, and says no real backend is required. **Instructor approval to use PocketBase is confirmed.** Proceed with PocketBase as the backend and the documented no-AsyncStorage architecture. Retain the required minimum sample dataset and simulated payment/tracking behavior. If the approval did not explicitly cover replacing AsyncStorage, clarify that specific grading requirement without delaying PocketBase implementation. |
+| Expo SDK & template    | **Installed 2026-11-05:** Expo 58.0.23 (SDK 58), React 19.3.0, React Native 0.88.1; JavaScript blank-style starter. Dependency check and Expo Doctor (20/20) passed. Physical Expo Go compatibility is still unverified. Match the actual Expo Go version and choose a **plain JavaScript / React Navigation** starting point rather than the default Expo Router architecture.                                                                                                                                                                  |
+| Phone platform         | **Undecided.** Android recommended for simplest Windows setup; confirm exact device.                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| PocketBase deployment  | **Undecided.** LAN-hosted on Windows for early development; decide remote HTTPS demo hosting if needed.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| Session persistence    | **Undecided.** In-memory session needs no storage library; `expo-secure-store` is only for persistent auth tokens if selected.                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Real-time tracking     | The brief specifies **simulated timer-driven statuses**. No realtime/SSE package is needed for the initial implementation.                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| Wallet integrity       | Simulated academic prototype only until server-side transactional enforcement is defined.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 
 **Documentation maintenance:** This file is the source of truth for tooling. Record the confirmed PocketBase approval in the **original brief/project requirements notes**, if not already recorded. `docs/ARCHITECTURE.md` and `docs/DEVELOPMENT_PLAN.md` already describe the PocketBase approach; align any outdated approval wording in `docs/ARCHITECTURE.md` separately. No other project documents have been modified.
 

@@ -7,7 +7,7 @@
 
 ## 1. Decisions and scope
 
-This plan follows the original *CampusGo – Antonine Campus Delivery Application* brief (`docs/Project_CampusGo_Campus_Delivery.pdf`), `docs/TECH_STACK.md`, and `docs/ARCHITECTURE.md`.
+This plan follows the original _CampusGo – Antonine Campus Delivery Application_ brief (`docs/Project_CampusGo_Campus_Delivery.pdf`), `docs/TECH_STACK.md`, and `docs/ARCHITECTURE.md`.
 
 - **Instructor approval for PocketBase has been obtained.** PocketBase is the chosen backend for authentication, persistent data, and API operations; no additional PocketBase approval checkpoint is needed.
 - Use **React Native + Expo, JavaScript, React Navigation (bottom tabs and native stacks), PocketBase, the official PocketBase JavaScript SDK, VS Code, Codex, Git, and GitHub**.
@@ -26,6 +26,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Prove that the team's Windows computer and test phone can run the selected tools.
 
 **Main tasks**
+
 1. Install/verify Node.js LTS, npm, Git, VS Code, the Codex extension, and Expo Go on the phone.
 2. Check the **Expo SDK supported by the installed Expo Go app**; select a compatible JavaScript `blank` template rather than assuming the latest SDK works. Record the tested SDK and device.
 3. Download a Windows-compatible PocketBase release from the official site. Record the selected version; inspect the binary's available commands.
@@ -34,6 +35,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** A documented, compatible toolchain; no app code required yet.
 
 **Verification checklist**
+
 - [ ] `node --version`, `npm --version`, `npx --version`, `git --version`, and `code --version` work.
 - [ ] VS Code opens and Codex is signed in/available.
 - [ ] Expo Go is installed; its compatibility with the chosen SDK is checked.
@@ -46,6 +48,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Establish one shared repository and the instructions Codex will follow.
 
 **Main tasks**
+
 1. Create an **empty** GitHub repository named `uniexpress` (no generated README or template files to conflict with Expo initialization).
 2. Clone it locally or create a local Git repository; open the **repository root** in VS Code.
 3. Keep `AGENTS.md` at the **repository root**. Put `docs/TECH_STACK.md`, `docs/ARCHITECTURE.md`, `docs/DEVELOPMENT_PLAN.md`, and `docs/Project_CampusGo_Campus_Delivery.pdf` under `docs/` so Codex can consult them.
@@ -55,6 +58,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** A clean GitHub repository with authoritative project instructions.
 
 **Verification checklist**
+
 - [ ] `git status` shows the expected files and no sensitive/generated files.
 - [ ] Root `AGENTS.md` and all four project documents under `docs/` exist and are available to the team.
 - [ ] `AGENTS.md` names JavaScript, Expo, React Navigation, and PocketBase.
@@ -69,6 +73,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Run the smallest possible React Native app before writing features.
 
 **Main tasks**
+
 1. From the empty `uniexpress/` repository root, initialize Expo using the compatible **JavaScript `blank`** template (see commands in §3). Use `--no-agents-md` if supported so Expo does not generate a competing `AGENTS.md`.
 2. Confirm `App.js`, `app.json`, `package.json`, and the lockfile are present. Set the display name to **UniExpress**.
 3. Start Metro with `npx expo start`; open the app in Expo Go on the phone.
@@ -78,6 +83,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** UniExpress launches from VS Code on a real phone.
 
 **Verification checklist**
+
 - [ ] `npx expo start` starts without a blocking error.
 - [ ] Expo Go loads a simple UniExpress screen on the test phone.
 - [ ] Editing `App.js` refreshes the phone.
@@ -91,6 +97,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Make the required screen flow navigable before connecting data.
 
 **Main tasks**
+
 1. Install React Navigation core, native stack, bottom tabs, and Expo-compatible native prerequisites.
 2. Add `src/navigation/` and small placeholder screens under `src/screens/` **as needed**, following `docs/ARCHITECTURE.md`.
 3. Configure `App.js`, `RootNavigator.js`, `AuthNavigator.js`, `MainTabNavigator.js`, and `MainStackNavigator.js` without introducing Expo Router.
@@ -102,6 +109,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Implementation checkpoint (2026-11-05):** Phase 4 skeleton implemented; Android/iOS bundle compilation, Expo dependency checks and router transition checks passed. Physical Expo Go testing remains pending, so Phase 4 is not marked complete. `RootNavigator` uses a local, memory-only development preview flag guarded by `__DEV__`; Phase 7 must replace it with `AuthContext`. See [the verification record](PHASE_4_VERIFICATION.md) for the hierarchy, changed files, commands and device walkthrough. Do not proceed to Phase 5 automatically.
 
 **Verification checklist**
+
 - [ ] All primary tabs and representative stack routes open and return correctly.
 - [ ] No duplicated/conflicting navigation headers or broken back behavior.
 - [ ] Every screen has a functional component; no TypeScript files.
@@ -111,9 +119,10 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 
 ### Phase 5 — Install PocketBase and connect the phone
 
-**Objective:** Make one shared PocketBase instance reachable by the development machine and Expo Go.
+**Objective:** Make one shared PocketBase (Version 0.41.1) instance reachable by the development machine and Expo Go.
 
 **Main tasks**
+
 1. Place the downloaded Windows binary locally under `pocketbase/` (or a documented separate local location); **ignore the binary and `pb_data/` in Git**.
 2. Start PocketBase, create the initial **superuser through the local setup flow**, and confirm the dashboard and `/api/health` endpoint.
 3. For phone testing, check PocketBase's version-specific `serve --help`, bind to the development PC's LAN interface (for example `--http=0.0.0.0:8090`), and allow trusted private-network firewall access.
@@ -122,7 +131,10 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 
 **Expected result:** Both PC and phone can reach the local PocketBase API, without an Express server.
 
+**Current implementation checkpoint (2026-11-08):** Phase 5 client integration is implemented: centralized SDK client, Expo URL configuration, service-level health check, graceful configuration/network/timeout errors and a temporary Home connectivity indicator with retry. PC loopback, configured LAN and real SDK service health checks passed. Git excludes `.env.local`, the binary and `pb_data`; none is tracked. Phone reachability and Expo Go UI testing remain pending, so this phase is not marked complete. See [Phase 5 verification](PHASE_5_VERIFICATION.md). The Phase 4 record remains historical; this user-authorized Phase 5 task supersedes its instruction to wait. Do not begin Phase 6 automatically.
+
 **Verification checklist**
+
 - [ ] PocketBase dashboard opens on the PC.
 - [ ] `http://127.0.0.1:8090/api/health` responds on the PC.
 - [ ] `http://<PC_LAN_IP>:8090/api/health` responds in the phone's browser.
@@ -136,6 +148,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Establish reliable data before building data-driven screens.
 
 **Main tasks**
+
 1. Follow `docs/ARCHITECTURE.md` to add only the required PocketBase collections: `users` (auth), `stores`, `store_hours`, `product_categories`, `products`, `buildings`, `delivery_slots`, `saved_locations`, `pricing_rules`, `orders`, `order_items`, `wallets`, `wallet_transactions`, `ratings`.
 2. Define important fields, relation targets, required values, uniqueness, indexes, and admin/user access rules. Use **integer cents** for money.
 3. Commit generated/checked `pocketbase/pb_migrations/`; create repeatable **synthetic** seed files under `pocketbase/seed/` with at least 4 stores, 25 products, 6 buildings, and 5 delivery slots.
@@ -146,6 +159,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** A seeded schema and safe collection APIs with no real student data.
 
 **Verification checklist**
+
 - [ ] Minimum counts: 4 stores, 25 products, 6 buildings, 5 slots.
 - [ ] Collections, relations, pricing rules, and migrations are reproducible.
 - [ ] Public or approved catalog reads work; protected data is not globally visible.
@@ -159,6 +173,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Allow a university user to register, sign in/out, and manage their own details.
 
 **Main tasks**
+
 1. Implement `authService.js`, `AuthContext.js`, and the Welcome/Login/Sign Up screens.
 2. Validate `@ua.edu.lb` email, university ID format, password length, required name/faculty/phone fields, and readable error messages. Enforce identity-critical checks **in PocketBase hooks/rules**, not just in forms. Finalize the university ID format and demo email-verification policy.
 3. Implement owner-only profile read/edit and `saved_locations` list/create/edit/delete through service modules.
@@ -168,6 +183,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** Demo users can register/login and see only their own profile/locations.
 
 **Verification checklist**
+
 - [ ] Valid university demo account signs up and signs in.
 - [ ] Invalid domain, missing fields, malformed ID, and short password are rejected.
 - [ ] Incorrect password shows a recoverable error; logout returns to auth screens.
@@ -181,6 +197,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Deliver the core browsing experience from live PocketBase collections.
 
 **Main tasks**
+
 1. Implement `catalogService.js`, `HomeScreen.js`, `StoreScreen.js`, and `ProductDetailsScreen.js` using the planned reusable components.
 2. Show store name/logo/category/preparation time and **open/closed status** computed from stored hours and current campus-local time. Closed stores must be visibly unavailable for ordering.
 3. Add store search and category filter; show product categories, images, prices, sizes/extras, quantity, and out-of-stock indicators.
@@ -190,6 +207,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** Users can browse all campus services and product details from PocketBase.
 
 **Verification checklist**
+
 - [ ] All four stores and seeded products are visible; filtering/search work.
 - [ ] Closed stores and out-of-stock products are clearly identified.
 - [ ] Product options and quantity controls behave correctly.
@@ -203,6 +221,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Complete pre-checkout selection and pricing previews.
 
 **Main tasks**
+
 1. Implement `CartContext.js`, `useCart.js`, `CartScreen.js`, reusable cart row/total components, and cart badge.
 2. Keep cart **in memory**. Enforce the **one-store-only** rule: ask for confirmation before replacing existing store items; block out-of-stock products.
 3. Implement `PrintingScreen.js`: simulated **document name** (no upload), page count, copies, B&W/color, single/double-sided, and none/staple/spiral binding.
@@ -212,6 +231,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** Product and print-job carts work consistently without persistent local storage.
 
 **Verification checklist**
+
 - [ ] Adding an item from a second store requires explicit cart replacement.
 - [ ] Quantity/edit/remove/cart badge/totals respond correctly.
 - [ ] Printing options immediately change the preview price.
@@ -225,6 +245,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Place valid demo orders without allowing the mobile client to forge totals or wallet changes.
 
 **Main tasks**
+
 1. Build `CheckoutScreen.js`, `deliveryService.js`, `pricingService.js`, `orderService.js`, `walletService.js`, and `WalletScreen.js`.
 2. Let users choose a seeded building, required room number, a valid **future class-break slot**, and **wallet** or **simulated cash**. Disable slots already passed or too close to the store's preparation time.
 3. Show a checkout estimate but send only cart item IDs/options or print specifications, location, slot/date, payment method, and a unique request identifier to PocketBase—**never trust client-supplied prices or user IDs**.
@@ -235,6 +256,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** Real PocketBase order records with **simulated** wallet or cash payment and server-enforced rules.
 
 **Verification checklist**
+
 - [ ] Subtotal under $2 is refused; under $10 incurs $0.50 delivery, $10+ is free.
 - [ ] Closed store, past/too-close slot, missing room, and unavailable items are refused **server-side**.
 - [ ] Insufficient-wallet payment is refused; no partial order or deduction is created.
@@ -250,6 +272,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Complete the post-checkout experience required by the brief.
 
 **Main tasks**
+
 1. Implement `OrderTrackingScreen.js` with the timeline **Received → Preparing → On the way → Delivered**, courier name, destination, and estimated time.
 2. Demonstrate timer-driven visual progress with `useEffect` **and cleanup**; distinguish local visual simulation from persisted server status. If the order must persist as `delivered` for ratings/history, add a minimal **server-authorized demo status progression** mechanism; the UI timer itself must not grant privileges.
 3. Implement an owner-checked rating route for **1–5 stars plus comment**, enabled only for orders whose **server status is delivered**.
@@ -260,6 +283,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** A complete simulated order lifecycle and accurate order history.
 
 **Verification checklist**
+
 - [ ] Timeline advances in the demo and stops its timer on screen cleanup.
 - [ ] Server-owned status is not editable directly from the client.
 - [ ] Cancellation is absent after the Received state; ratings require persisted delivery.
@@ -274,6 +298,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Objective:** Produce a stable, understandable coursework submission.
 
 **Main tasks**
+
 1. Test every flow on a **physical phone using Expo Go**; include real Wi-Fi/API errors, authentication failure, logout, empty cart, missing images, closed stores, invalid slot, wallet insufficiency, retry/double-tap, cancellation/refund, and reorder.
 2. Add consistent loading/error/empty states, sensible text sizes, touch targets, and readable validation. Avoid a redesign or dependency expansion near the deadline.
 3. Review `FlatList` usage, navigation/back behavior, `useEffect` timer cleanup, no secrets in Git, protected collection rules, and reproducible migrations/seed data.
@@ -283,6 +308,7 @@ This plan follows the original *CampusGo – Antonine Campus Delivery Applicatio
 **Expected result:** Runnable repository, demonstration-ready phone app, sample data, README guide, and presentation.
 
 **Verification checklist**
+
 - [ ] All seven screen groups from the brief are covered.
 - [ ] Minimum seed data counts and all key business rules pass on the device.
 - [ ] `npx expo start`, PocketBase startup, and clean login can be repeated reliably.
@@ -360,6 +386,7 @@ Do not install AsyncStorage, Expo Router, a UI framework, or an extra state libr
    ```
 
    Use the LAN binding option only if confirmed by the chosen release; keep it on a trusted network.
+
 3. Set up the first PocketBase superuser from the **PC** only at `http://127.0.0.1:8090/_/`.
 4. Verify the health endpoint from the PC and phone:
 

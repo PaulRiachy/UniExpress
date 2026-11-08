@@ -1,5 +1,7 @@
 # Phase 4 verification — 2026-11-05
 
+Historical navigation checkpoint. Active development has advanced to [Phase 5 — PocketBase connectivity](PHASE_5_VERIFICATION.md) at the user's request. The results below remain the original Phase 4 evidence; they do not imply new physical-device confirmation.
+
 Navigation skeleton implemented. Native device tests remain pending; Phase 4 is not marked complete. No Phase 5 work, backend, real authentication, catalog records, cart state, wallet calculations or checkout logic was added.
 
 ## Hierarchy and state
