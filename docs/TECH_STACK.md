@@ -64,7 +64,9 @@ Prefer `npx expo install` for Expo/native packages so versions match the chosen 
 
 **Phase 4 installed versions (2026-11-05):** React Navigation native 7.5.1, native-stack 7.21.0, bottom-tabs 7.21.0; react-native-screens 4.30.1 and react-native-safe-area-context 5.11.1. These packages were already installed when Phase 4 implementation began; no dependency files were changed during that task. Expo dependency validation and Expo Doctor (20/20) passed. See `docs/PHASE_4_VERIFICATION.md` for navigation checks and pending device tests.
 
-**Current Phase 5 checkpoint (2026-11-08):** PocketBase JavaScript SDK 0.28.2 was already installed. `src/services/pocketbase.js` now owns the sole SDK client with a memory-only store and an abortable, eight-second health check. Home consumes only the service function for a temporary connectivity indicator. No new dependencies, collections or authentication features were added. PC loopback/LAN and real SDK health checks passed; phone connectivity remains unverified. See [Phase 5 verification](PHASE_5_VERIFICATION.md).
+**Phase 5 checkpoint (2026-11-08):** PocketBase JavaScript SDK 0.28.2 was already installed. `src/services/pocketbase.js` now owns the sole SDK client with a memory-only store and an abortable, eight-second health check. Home consumes only the service function for a temporary connectivity indicator. No new dependencies, collections or authentication features were added. PC loopback/LAN and real SDK health checks passed. On 2026-11-10 the user confirmed Phase 5 completed and the physical phone connects to PocketBase 0.41.1. See [Phase 5 verification](PHASE_5_VERIFICATION.md).
+
+**Current Phase 6 checkpoint (2026-11-10):** The documented collections, access rules, migrations and synthetic sample data are implemented and applied locally. Integration tests use PocketBase 0.41.1 and Node built-ins; no new dependencies. See [Phase 6 verification](PHASE_6_VERIFICATION.md) and [migration/seed procedures](pocketbase-setup.md).
 
 ## 4. PocketBase setup and integration
 

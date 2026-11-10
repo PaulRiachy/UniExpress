@@ -1,0 +1,565 @@
+{
+  "stores": [
+    {
+      "id": "s00000000000001",
+      "name": "Cafeteria",
+      "category": "Food",
+      "description": "Synthetic campus demo service.",
+      "preparation_minutes": 15,
+      "is_active": true
+    },
+    {
+      "id": "s00000000000002",
+      "name": "Coffee Corner",
+      "category": "Drinks",
+      "description": "Synthetic campus demo service.",
+      "preparation_minutes": 10,
+      "is_active": true
+    },
+    {
+      "id": "s00000000000003",
+      "name": "Bookstore & Stationery",
+      "category": "Stationery",
+      "description": "Synthetic campus demo service.",
+      "preparation_minutes": 5,
+      "is_active": true
+    },
+    {
+      "id": "s00000000000004",
+      "name": "Printing Office",
+      "category": "Printing",
+      "description": "Synthetic campus demo service.",
+      "preparation_minutes": 20,
+      "is_active": true
+    }
+  ],
+  "store_hours": [
+    {
+      "id": "h00000000000001",
+      "store": "s00000000000001",
+      "weekday": 0,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000002",
+      "store": "s00000000000001",
+      "weekday": 1,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000003",
+      "store": "s00000000000001",
+      "weekday": 2,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000004",
+      "store": "s00000000000001",
+      "weekday": 3,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000005",
+      "store": "s00000000000001",
+      "weekday": 4,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000006",
+      "store": "s00000000000001",
+      "weekday": 5,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000007",
+      "store": "s00000000000001",
+      "weekday": 6,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000008",
+      "store": "s00000000000002",
+      "weekday": 0,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000009",
+      "store": "s00000000000002",
+      "weekday": 1,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000010",
+      "store": "s00000000000002",
+      "weekday": 2,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000011",
+      "store": "s00000000000002",
+      "weekday": 3,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000012",
+      "store": "s00000000000002",
+      "weekday": 4,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000013",
+      "store": "s00000000000002",
+      "weekday": 5,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000014",
+      "store": "s00000000000002",
+      "weekday": 6,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000015",
+      "store": "s00000000000003",
+      "weekday": 0,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000016",
+      "store": "s00000000000003",
+      "weekday": 1,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000017",
+      "store": "s00000000000003",
+      "weekday": 2,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000018",
+      "store": "s00000000000003",
+      "weekday": 3,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000019",
+      "store": "s00000000000003",
+      "weekday": 4,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000020",
+      "store": "s00000000000003",
+      "weekday": 5,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000021",
+      "store": "s00000000000003",
+      "weekday": 6,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000022",
+      "store": "s00000000000004",
+      "weekday": 0,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    },
+    {
+      "id": "h00000000000023",
+      "store": "s00000000000004",
+      "weekday": 1,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000024",
+      "store": "s00000000000004",
+      "weekday": 2,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000025",
+      "store": "s00000000000004",
+      "weekday": 3,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000026",
+      "store": "s00000000000004",
+      "weekday": 4,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000027",
+      "store": "s00000000000004",
+      "weekday": 5,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": false
+    },
+    {
+      "id": "h00000000000028",
+      "store": "s00000000000004",
+      "weekday": 6,
+      "opens_at": "08:00",
+      "closes_at": "17:00",
+      "is_closed": true
+    }
+  ],
+  "product_categories": [
+    {
+      "id": "c00000000000001",
+      "store": "s00000000000001",
+      "name": "Food",
+      "sort_order": 1
+    },
+    {
+      "id": "c00000000000002",
+      "store": "s00000000000002",
+      "name": "Drinks",
+      "sort_order": 2
+    },
+    {
+      "id": "c00000000000003",
+      "store": "s00000000000003",
+      "name": "Stationery",
+      "sort_order": 3
+    },
+    {
+      "id": "c00000000000004",
+      "store": "s00000000000004",
+      "name": "Printing",
+      "sort_order": 4
+    }
+  ],
+  "products": [
+    {
+      "id": "p00000000000001",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Cheese Sandwich",
+      "description": "Synthetic demo product.",
+      "price_cents": 250,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000002",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Chicken Sandwich",
+      "description": "Synthetic demo product.",
+      "price_cents": 400,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000003",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Vegetable Wrap",
+      "description": "Synthetic demo product.",
+      "price_cents": 300,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000004",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Salad Bowl",
+      "description": "Synthetic demo product.",
+      "price_cents": 450,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000005",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Fruit Cup",
+      "description": "Synthetic demo product.",
+      "price_cents": 200,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000006",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Water",
+      "description": "Synthetic demo product.",
+      "price_cents": 100,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000007",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Juice",
+      "description": "Synthetic demo product.",
+      "price_cents": 150,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000008",
+      "store": "s00000000000001",
+      "category": "c00000000000001",
+      "name": "Croissant",
+      "description": "Synthetic demo product.",
+      "price_cents": 200,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000009",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Espresso",
+      "description": "Synthetic demo product.",
+      "price_cents": 150,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000010",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Americano",
+      "description": "Synthetic demo product.",
+      "price_cents": 200,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000011",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Latte",
+      "description": "Synthetic demo product.",
+      "price_cents": 300,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000012",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Cappuccino",
+      "description": "Synthetic demo product.",
+      "price_cents": 300,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000013",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Tea",
+      "description": "Synthetic demo product.",
+      "price_cents": 150,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000014",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Hot Chocolate",
+      "description": "Synthetic demo product.",
+      "price_cents": 300,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000015",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Iced Coffee",
+      "description": "Synthetic demo product.",
+      "price_cents": 350,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000016",
+      "store": "s00000000000002",
+      "category": "c00000000000002",
+      "name": "Cookie",
+      "description": "Synthetic demo product.",
+      "price_cents": 150,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000017",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Notebook A5",
+      "description": "Synthetic demo product.",
+      "price_cents": 250,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000018",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Notebook A4",
+      "description": "Synthetic demo product.",
+      "price_cents": 400,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000019",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Blue Pen",
+      "description": "Synthetic demo product.",
+      "price_cents": 75,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000020",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Pencil",
+      "description": "Synthetic demo product.",
+      "price_cents": 50,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000021",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Eraser",
+      "description": "Synthetic demo product.",
+      "price_cents": 50,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000022",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Highlighter",
+      "description": "Synthetic demo product.",
+      "price_cents": 125,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000023",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Folder",
+      "description": "Synthetic demo product.",
+      "price_cents": 150,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000024",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Sticky Notes",
+      "description": "Synthetic demo product.",
+      "price_cents": 200,
+      "in_stock": true,
+      "is_active": true,
+      "options_json": []
+    },
+    {
+      "id": "p00000000000025",
+      "store": "s00000000000003",
+      "category": "c00000000000003",
+      "name": "Ruler",
+      "description": "Synthetic demo product.",
+      "price_cents": 100,
+      "in_stock": false,
+      "is_active": true,
+      "options_json": []
+    }
+  ]
+}

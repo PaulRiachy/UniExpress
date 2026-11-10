@@ -131,7 +131,7 @@ This plan follows the original _CampusGo – Antonine Campus Delivery Applicatio
 
 **Expected result:** Both PC and phone can reach the local PocketBase API, without an Express server.
 
-**Current implementation checkpoint (2026-11-08):** Phase 5 client integration is implemented: centralized SDK client, Expo URL configuration, service-level health check, graceful configuration/network/timeout errors and a temporary Home connectivity indicator with retry. PC loopback, configured LAN and real SDK service health checks passed. Git excludes `.env.local`, the binary and `pb_data`; none is tracked. Phone reachability and Expo Go UI testing remain pending, so this phase is not marked complete. See [Phase 5 verification](PHASE_5_VERIFICATION.md). The Phase 4 record remains historical; this user-authorized Phase 5 task supersedes its instruction to wait. Do not begin Phase 6 automatically.
+**Current implementation checkpoint (2026-11-08):** Phase 5 client integration is implemented: centralized SDK client, Expo URL configuration, service-level health check, graceful configuration/network/timeout errors and a temporary Home connectivity indicator with retry. PC loopback, configured LAN and real SDK service health checks passed. Git excludes `.env.local`, the binary and `pb_data`; none is tracked. On 2026-11-10 the user confirmed Phase 5 completed and Expo connects to PocketBase 0.41.1 from a physical phone. See [Phase 5 verification](PHASE_5_VERIFICATION.md). The Phase 4 record remains historical; this user-authorized Phase 5 task supersedes its instruction to wait. Phase 6 was subsequently authorized by the user.
 
 **Verification checklist**
 
@@ -158,13 +158,15 @@ This plan follows the original _CampusGo – Antonine Campus Delivery Applicatio
 
 **Expected result:** A seeded schema and safe collection APIs with no real student data.
 
+**Implementation checkpoint (2026-11-10):** The 14 collections, owner/catalog rules, validated fields/indexes and synthetic seed migrations are implemented and applied locally after a private SQLite snapshot. All existing record fingerprints were preserved. The isolated suite passed 225 API assertions plus migration-conflict preservation checks. See [Phase 6 verification](PHASE_6_VERIFICATION.md) and [repeatable migration/seed procedure](pocketbase-setup.md), including explicit demo staple/duplex/extras policies. Local server restart, dashboard review and committing the reviewed source remain the final checkpoint; no Phase 7 feature work has started.
+
 **Verification checklist**
 
-- [ ] Minimum counts: 4 stores, 25 products, 6 buildings, 5 slots.
-- [ ] Collections, relations, pricing rules, and migrations are reproducible.
-- [ ] Public or approved catalog reads work; protected data is not globally visible.
-- [ ] Client writes to authoritative money/order fields are denied.
-- [ ] No `pb_data/` or actual accounts/passwords are committed.
+- [x] Minimum counts: 4 stores, 25 products, 6 buildings, 5 slots.
+- [x] Collections, relations, pricing rules, and migrations are reproducible.
+- [x] Public or approved catalog reads work; protected data is not globally visible.
+- [x] Client writes to authoritative money/order fields are denied.
+- [x] No `pb_data/` or actual accounts/passwords are committed.
 
 **Proceed when:** Data and access-rule checks pass before authentication-dependent features.
 

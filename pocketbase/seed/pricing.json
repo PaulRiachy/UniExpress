@@ -1,0 +1,16 @@
+{
+  "pricing_rules": [
+    {
+      "id": "r00000000000001",
+      "minimum_order_cents": 200,
+      "free_delivery_threshold_cents": 1000,
+      "delivery_fee_cents": 50,
+      "bw_page_cents": 5,
+      "color_page_cents": 25,
+      "spiral_binding_cents": 150,
+      "staple_fee_cents": 0,
+      "duplex_policy": "per_page_no_surcharge",
+      "is_active": true
+    }
+  ]
+}

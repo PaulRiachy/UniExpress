@@ -79,12 +79,15 @@ Never commit:
 
 ## Development status
 
+Current Phase 6 setup, schema decisions, migration/seed commands and preservation procedures are documented in [docs/pocketbase-setup.md](../docs/pocketbase-setup.md). Test evidence and the local dashboard checkpoint are in [docs/PHASE_6_VERIFICATION.md](../docs/PHASE_6_VERIFICATION.md).
+
 - PocketBase 0.41.1 executable verified.
-- Server startup: Pending verification.
+- Server startup: Verified during Phase 5.
 - Superuser creation: Pending verification.
-- PC health check: Pending verification.
-- Phone connectivity check: Pending verification.
-- React Native SDK integration: Phase 5.
+- PC health check: Verified during Phase 5.
+- Phone connectivity check: User confirmed on 2026-11-10.
+- React Native SDK integration: Phase 5 completed, as confirmed by the user.
+- Phase 6 schema and synthetic seed: Applied locally; restart the server and review the dashboard. No manual schema creation is required.
 
 ## Official documentation
 

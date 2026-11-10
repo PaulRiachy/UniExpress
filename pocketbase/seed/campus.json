@@ -1,0 +1,82 @@
+{
+  "buildings": [
+    {
+      "id": "b00000000000001",
+      "code": "DEMO-A",
+      "name": "Demo Building A",
+      "is_active": true
+    },
+    {
+      "id": "b00000000000002",
+      "code": "DEMO-B",
+      "name": "Demo Building B",
+      "is_active": true
+    },
+    {
+      "id": "b00000000000003",
+      "code": "DEMO-C",
+      "name": "Demo Building C",
+      "is_active": true
+    },
+    {
+      "id": "b00000000000004",
+      "code": "DEMO-D",
+      "name": "Demo Building D",
+      "is_active": true
+    },
+    {
+      "id": "b00000000000005",
+      "code": "DEMO-E",
+      "name": "Demo Building E",
+      "is_active": true
+    },
+    {
+      "id": "b00000000000006",
+      "code": "DEMO-F",
+      "name": "Demo Building F",
+      "is_active": true
+    }
+  ],
+  "delivery_slots": [
+    {
+      "id": "d00000000000001",
+      "label": "09:45-10:00",
+      "start_time": "09:45",
+      "end_time": "10:00",
+      "is_active": true,
+      "sort_order": 1
+    },
+    {
+      "id": "d00000000000002",
+      "label": "11:15-11:30",
+      "start_time": "11:15",
+      "end_time": "11:30",
+      "is_active": true,
+      "sort_order": 2
+    },
+    {
+      "id": "d00000000000003",
+      "label": "12:45-13:30",
+      "start_time": "12:45",
+      "end_time": "13:30",
+      "is_active": true,
+      "sort_order": 3
+    },
+    {
+      "id": "d00000000000004",
+      "label": "14:45-15:00",
+      "start_time": "14:45",
+      "end_time": "15:00",
+      "is_active": true,
+      "sort_order": 4
+    },
+    {
+      "id": "d00000000000005",
+      "label": "16:15-16:30",
+      "start_time": "16:15",
+      "end_time": "16:30",
+      "is_active": true,
+      "sort_order": 5
+    }
+  ]
+}

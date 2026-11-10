@@ -1,5 +1,7 @@
 # Phase 5 — PocketBase integration verification
 
+**User confirmation, 2026-11-10:** Phase 5 was successfully completed; Expo connects to PocketBase 0.41.1 from a physical phone. The original results below remain the historical 2026-11-08 record. Active work has advanced to [Phase 6](PHASE_6_VERIFICATION.md).
+
 Date: 2026-11-08. Client integration and PC connectivity checks passed. Phone checks remain pending; Phase 5 is not marked complete. No collections, login, registration, custom backend or application business logic were implemented.
 
 ## Implementation and affected files

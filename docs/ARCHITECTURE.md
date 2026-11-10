@@ -228,6 +228,8 @@ pricing_rules: active trusted price/fee policy
 
 ## 5. PocketBase access rules and server-side hooks
 
+**Phase 6 implementation (2026-11-10):** The 14 collections above are implemented in `pocketbase/pb_migrations/` for PocketBase 0.41.1, with versioned synthetic data under `pocketbase/seed/`. Public catalog reads are selected; private records use owner filters. Registration stays locked until Phase 7; authoritative writes stay locked until trusted routes exist. `pricing_rules` includes `is_active` with a unique partial index allowing one active policy. Optional `stores.logo` and `products.image` are URL fields, left empty in the synthetic seed. Existing optional auth-avatar fields are preserved. All relations are single-select and non-cascading. See [schema policies and migration procedure](pocketbase-setup.md) for required fields, indexes, demo schedules, provisional ID validation and explicit staple/duplex/extras decisions. Cross-record business validation remains assigned to the later trusted operations below.
+
 **Rules are an authorization layer, not a price calculator.** Define and test all five collection rules (`list`, `view`, `create`, `update`, `delete`) individually. In PocketBase **empty rule = public**, while **locked / `null` = superuser-only**. Never grant a public write rule accidentally.
 
 | Area | Recommended access |
