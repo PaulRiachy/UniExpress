@@ -103,6 +103,50 @@ async function main() {
   expect(await api('POST','users','',{...profile,email:'phase6-duplicate@ua.edu.lb',university_id:'TEST-A'},admin),400);
   expect(await api('POST','users','',{...profile,email:'phase6-missing@ua.edu.lb'},admin),400);
   expect(await api('POST','users','',{...profile,email:'phase6-short@ua.edu.lb',university_id:'TEST-C',password:'short',passwordConfirm:'short'},admin),400);
+  // Phase 7: real frontend services, one singleton, against the disposable server.
+  process.env.EXPO_PUBLIC_POCKETBASE_URL = base;
+  const authService = await import('../../src/services/authService.js');
+  const deliveryService = await import('../../src/services/deliveryService.js');
+  const randomId = 'SVC-' + crypto.randomBytes(6).toString('hex');
+  const values = {...profile,faculty:'Engineering and Technology',email:'phase7-service@ua.edu.lb',university_id:randomId};
+  await authService.register(values);
+  await assert.rejects(authService.register({...values,university_id:randomId+'A'}),e => !!e.fieldErrors?.email);
+  await assert.rejects(authService.register({...values,email:'duplicate-id@ua.edu.lb'}),e => !!e.fieldErrors?.university_id);
+  await assert.rejects(authService.register({...values,faculty:''}),e => !!e.fieldErrors?.faculty);
+  assert.equal(authService.getCurrentUser(), null); // registration does not sign in
+  await assert.rejects(authService.register({...values,email:'bad@example.invalid'}));
+  await assert.rejects(authService.register({...values,university_id:'!'}));
+  await assert.rejects(authService.login(values.email,'wrong-password'));
+  await authService.login(values.email,password);
+  const serviceUser = authService.getCurrentUser();
+  assert.ok(serviceUser);
+  await authService.updateProfile({...serviceUser,name:'Updated Service Name',verified:true,account_type:'staff'});
+  const fetched = await authService.fetchProfile();
+  assert.equal(fetched.name,'Updated Service Name');
+  assert.equal(fetched.verified,false);
+  assert.equal(fetched.account_type,'student');
+  const svcBuildings = await deliveryService.getBuildings();
+  const loc = await deliveryService.saveLocation({label:'Service location',room:'101',building:svcBuildings[0].id});
+  await deliveryService.saveLocation({label:'Service location',room:'202',building:svcBuildings[0].id},loc.id);
+  assert.equal((await deliveryService.getSavedLocations())[0].room,'202');
+  await deliveryService.deleteLocation(loc.id);
+  assert.equal((await deliveryService.getSavedLocations()).length,0);
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => { throw new TypeError('Offline test'); };
+  try { await assert.rejects(authService.fetchProfile(), /Connection failed/); }
+  finally { globalThis.fetch = originalFetch; }
+  assert.equal((await authService.fetchProfile()).id,serviceUser.id);
+  console.log('PASS: service network failure is readable; retry recovers.');
+  authService.logout();assert.equal(authService.getCurrentUser(),null);
+  const restart = spawnSync(process.execPath,['--input-type=module','-e',"process.env.EXPO_PUBLIC_POCKETBASE_URL='"+base+"';const a=await import('./src/services/authService.js');if(a.getCurrentUser()!==null)process.exit(1)"],{cwd:path.resolve(backend,'..'),encoding:'utf8'});
+  assert.equal(restart.status,0);
+  expect(await api('POST','users','',{...profile,email:'tampered@ua.edu.lb',university_id:'TEST-T',verified:true}),400);
+  const tokenAttempt = expect(await api('POST','users','',{...profile,email:'token-attempt@ua.edu.lb',university_id:'TEST-U',tokenKey:'x'.repeat(50)}),200); assert.equal(tokenAttempt.tokenKey,undefined);
+  for (const changes of [{email:'bad@example.invalid'},{university_id:'!'}, {university_id:''},
+    {faculty:''}, {password:'short',passwordConfirm:'short'}, {passwordConfirm:'does-not-match'}, {account_type:'admin'}]) {
+    expect(await api('POST','users','',{...profile,email:'public-invalid@ua.edu.lb',university_id:'TEST-INVALID',...changes}),400);
+  }
+  console.log('PASS: Phase 7 service registration/login/profile/location CRUD/logout/fresh-process session reset.');
   const store = lists.stores[0].id;
   const building = lists.buildings[0].id;
   const slot = lists.delivery_slots[0].id;
@@ -139,7 +183,7 @@ async function main() {
       expect(await api('DELETE',name,'records/'+row.id,undefined,token),403);
     }
   }
-  expect(await api('POST','users','',{...profile,email:'phase6-new@ua.edu.lb',university_id:'TEST-D'}),403);
+  expect(await api('POST','users','',{...profile,email:'phase6-new@ua.edu.lb',university_id:'TEST-D'}),200);
   expect(await api('DELETE','users','records/'+a.id,undefined,authA),403);
   expect(await api('PATCH','users','records/'+a.id,{phone:'11111111'},authA),200);
   expect(await api('PATCH','users','records/'+a.id,{phone:'22222222'},authB),404);

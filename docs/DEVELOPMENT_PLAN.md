@@ -172,6 +172,8 @@ This plan follows the original _CampusGo – Antonine Campus Delivery Applicatio
 
 ### Phase 7 — Implement authentication, profiles, and saved locations
 
+**Unified checkpoint (2026-11-14):** Authentication, profiles and saved locations are implemented, including the registration migration, LAN binding correction, field-specific validation and keyboard-aware forms. The current UI uses vibrant blue, a border-drawn dropdown chevron and separated 56dp department rows. The three Phase 7 reports and repeated checkpoints are consolidated into [the unified Phase 7 summary](PHASE_7_VERIFICATION.md). Error/regression tests and 234 API assertions pass; Expo dependencies and Doctor 20/20 pass. Native phone checks and institutional ID/email-verification decisions remain pending. Phase 8 remains deferred.
+
 **Objective:** Allow a university user to register, sign in/out, and manage their own details.
 
 **Main tasks**

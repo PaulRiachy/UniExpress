@@ -1,4 +1,6 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { colors, universityName } from '../../constants/theme';
+import { Action } from './FormScreen';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function PlaceholderScreen({ title, description, actions = [], headerContent }) {
@@ -14,13 +16,14 @@ export default function PlaceholderScreen({ title, description, actions = [], he
           paddingLeft: 24 + insets.left,
           paddingRight: 24 + insets.right,
           paddingBottom: 24 + insets.bottom,
+          width: '100%', maxWidth: 560, alignSelf: 'center',
         },
       ]}
       data={actions}
       keyExtractor={(item) => item.label}
       ListHeaderComponent={
         <View style={styles.introduction}>
-          <Text style={styles.caption}>UNIEXPRESS / NAVIGATION PREVIEW</Text>
+          <Text style={styles.caption}>{universityName}</Text>
           <Text accessibilityRole="header" style={styles.title}>{title}</Text>
           <Text style={styles.description}>{description}</Text>
           <Text style={styles.note}>Application features are still placeholders.</Text>
@@ -28,29 +31,21 @@ export default function PlaceholderScreen({ title, description, actions = [], he
         </View>
       }
       renderItem={({ item }) => (
-        <Pressable
-          accessibilityRole="button"
-          accessibilityState={{ disabled: Boolean(item.disabled) }}
-          disabled={item.disabled}
-          onPress={item.onPress}
-          style={({ pressed }) => [styles.button, (pressed || item.disabled) && styles.pressed]}
-        >
-          <Text style={styles.buttonText}>{item.label}</Text>
-        </Pressable>
+        <View style={{marginBottom:12}}><Action title={item.label} onPress={item.onPress} disabled={item.disabled} /></View>
       )}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: '#F5F8F7' },
+  screen: { flex: 1, backgroundColor: colors.white },
   content: { paddingTop: 28, flexGrow: 1 },
-  introduction: { marginBottom: 20 },
-  caption: { color: '#145C4A', fontSize: 12, fontWeight: '700', marginBottom: 16 },
-  title: { color: '#17352C', fontSize: 28, fontWeight: '700', marginBottom: 12 },
-  description: { color: '#364A43', fontSize: 17, lineHeight: 26 },
-  note: { color: '#53665E', fontSize: 14, lineHeight: 22, marginTop: 16 },
-  button: { backgroundColor: '#145C4A', borderRadius: 10, padding: 16, minHeight: 48, marginBottom: 12 },
+  introduction: { marginBottom: 24 },
+  caption: { color: colors.muted, fontSize: 14, lineHeight: 22, marginBottom: 16, textAlign: 'center' },
+  title: { textAlign: 'center', color: colors.primary, fontSize: 28, fontWeight: '700', marginBottom: 12 },
+  description: { textAlign: 'center', color: colors.muted, fontSize: 17, lineHeight: 26 },
+  note: { textAlign: 'center', color: colors.muted, fontSize: 14, lineHeight: 22, marginTop: 16 },
+  button: { backgroundColor: colors.primary, borderRadius: 10, padding: 16, minHeight: 48, marginBottom: 12 },
   pressed: { opacity: 0.75 },
-  buttonText: { color: '#FFFFFF', fontSize: 16, fontWeight: '600' },
+  buttonText: { color: colors.white, fontSize: 16, fontWeight: '600' },
 });

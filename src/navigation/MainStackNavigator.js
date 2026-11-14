@@ -1,3 +1,4 @@
+import { navigationOptions } from '../constants/theme';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainTabNavigator from './MainTabNavigator';
 import StoreScreen from '../screens/store/StoreScreen';
@@ -10,11 +11,11 @@ import SavedLocationsScreen from '../screens/profile/SavedLocationsScreen';
 
 const Stack = createNativeStackNavigator();
 
-export default function MainStackNavigator({ onExitPreview }) {
+export default function MainStackNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerBackButtonDisplayMode: 'minimal' }}>
+    <Stack.Navigator screenOptions={{ ...navigationOptions, headerBackButtonDisplayMode: 'minimal' }}>
       <Stack.Screen name="MainTabs" options={{ headerShown: false }}>
-        {() => <MainTabNavigator onExitPreview={onExitPreview} />}
+        {() => <MainTabNavigator  />}
       </Stack.Screen>
       <Stack.Screen name="Store" component={StoreScreen} />
       <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} options={{ title: 'Product Details' }} />

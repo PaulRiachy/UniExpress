@@ -1,3 +1,6 @@
+import { View } from 'react-native';
+import { Action } from '../../components/common/FormScreen';
+import { colors } from '../../constants/theme';
 import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import PlaceholderScreen from '../../components/common/PlaceholderScreen';
@@ -19,18 +22,15 @@ export default function HomeScreen({ navigation }) {
   return (
     <PlaceholderScreen
       title="Home"
-      description="Development-only preview. No account is signed in."
+      description="Welcome to UniExpress. Campus services will be available in a later phase."
       headerContent={
-        <Text accessibilityLiveRegion="polite" style={{ marginTop: 16, fontSize: 16, lineHeight: 24 }}>
-          API connectivity: {connection.message}
-        </Text>
+        <View style={{marginTop:16,padding:16,borderRadius:8,backgroundColor:colors.pale}}>
+          <Text accessibilityLiveRegion="polite" style={{fontSize:14,color:colors.text,lineHeight:20}}>PocketBase: {connection.status === 'connected' ? 'Connected' : connection.status === 'checking' ? 'Checking...' : 'Unreachable / not configured'}</Text>
+          {connection.status !== 'connected' && <Text style={{color:colors.muted,fontSize:13,marginTop:8}}>{connection.message}</Text>}
+          <Action variant="text" title="Check connection" disabled={connection.status === 'checking'} onPress={() => setAttempt(value => value+1)} />
+        </View>
       }
       actions={[
-        {
-          label: connection.status === 'checking' ? 'Checking API...' : 'Check API Connection Again',
-          disabled: connection.status === 'checking',
-          onPress: () => setAttempt((value) => value + 1),
-        },
         { label: "Open Store Preview", onPress: () => navigation.navigate("Store") },
         { label: "Open Printing Preview", onPress: () => navigation.navigate("Printing") },
       ]}

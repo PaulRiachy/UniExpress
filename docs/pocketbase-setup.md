@@ -1,5 +1,8 @@
 # PocketBase schema and sample data — Phase 6
 
+**Phase 7 update (2026-11-14):** The third migration enables validated registration; owner/profile rules and all catalog/money/order restrictions remain. Earlier Phase 6 descriptions of locked registration are historical. See [Phase 7 verification](PHASE_7_VERIFICATION.md) for current behavior, existing ID validation and the pending verification-policy decision.
+
+
 Use the pinned **PocketBase 0.41.1** executable and Node.js already required by Expo. No extra framework, SDK, credentials file or database server is needed to migrate or test the schema.
 
 ## Apply on a teammate's machine or an existing local database

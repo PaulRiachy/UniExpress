@@ -68,6 +68,8 @@ Prefer `npx expo install` for Expo/native packages so versions match the chosen 
 
 **Current Phase 6 checkpoint (2026-11-10):** The documented collections, access rules, migrations and synthetic sample data are implemented and applied locally. Integration tests use PocketBase 0.41.1 and Node built-ins; no new dependencies. See [Phase 6 verification](PHASE_6_VERIFICATION.md) and [migration/seed procedures](pocketbase-setup.md).
 
+**Phase 7 checkpoint (2026-11-14):** In-memory authentication, profile editing and saved locations now use the existing SDK singleton via services, AuthContext and useAuth. No dependencies were added. Registration rules changed in a targeted migration; institutional ID and email-verification policy remain unresolved beyond existing Phase 6 validation. Expo patch recommendations have since been resolved; dependency validation and Doctor 20/20 pass. See [the unified Phase 7 summary](PHASE_7_VERIFICATION.md).
+
 ## 4. PocketBase setup and integration
 
 - Use the downloaded **PocketBase Windows binary**, with a local `pb_data` directory and dashboard. The app communicates directly with the PocketBase server using the SDK and its REST APIs.
