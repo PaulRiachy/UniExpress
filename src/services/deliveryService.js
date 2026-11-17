@@ -6,6 +6,12 @@ function requireUser() {
   if (!user || !pocketbase) throw new Error('Please sign in again.');
   return user;
 }
+export function getDeliverySlots() {
+  requireUser();
+  return serviceRequest(options => pocketbase.collection('delivery_slots').getFullList({
+    ...options, filter: 'is_active = true', sort: 'start_time,sort_order,id',
+  }));
+}
 export function getBuildings() {
   requireUser();
   return serviceRequest(options => pocketbase.collection('buildings').getFullList({ ...options, filter: 'is_active = true', sort: 'code' }));

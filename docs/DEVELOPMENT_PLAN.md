@@ -200,6 +200,14 @@ This plan follows the original _CampusGo – Antonine Campus Delivery Applicatio
 
 **Objective:** Deliver the core browsing experience from live PocketBase collections.
 
+**Implementation checkpoint (2026-11-17):** The user authorized Phase 8 after confirming Phases 1–7 complete, superseding the historical deferral above. Home now loads the active PocketBase stores, derives category chips, combines name search/category filtering, and preserves its health-check/retry indicator. Store/product detail routes fetch by ID, show category-grouped products and unavailable stock, and offer local quantities (1–99) with integer-cent estimates and disabled cart actions. The documented `useStoreStatus` shares an `Asia/Beirut` clock per focused screen, refreshes on focus/foreground and every 15 seconds, and cleans up timers/subscriptions. A read-only owner wallet query and today's next unstarted delivery window populate the banner independently of catalog loading. No dependencies, navigation/auth gating, migrations, seed data or architecture decisions changed; Phase 9 has not started.
+
+**Data constraints:** Read-only inspection of the actual database and Phase 6 migrations confirmed URL media, Sunday=0 `HH:mm` hours, four categories, no product `sort_order`/category active flag, 25 products (including the out-of-stock Ruler), no Printing Office products and no wallet records. All `options_json` values are `[]`; the existing policy expressly defers sizes/paid extras pending agreement. The UI handles absent/empty options and reports unsupported nonempty configurations as unavailable rather than inventing choices or prices. Populated option selection/pricing needs an agreed and versioned data contract if required for acceptance. Slots have no date/day/calendar fields, so Home shows today's next unstarted active window as a candidate, or “No later slot today”; checkout will validate calendar/preparation/eligibility in Phase 10.
+
+**Verified checks (2026-11-17):** `node pocketbase/tests/verify-phase8.cjs` passes deterministic Beirut winter/summer/boundary/day-rollover and three device-timezone checks, search/filter/grouping/cents/quantity checks, all six catalog services against disposable PocketBase, inactive/out-of-stock behavior, fresh backend changes, owner/missing/zero/funded wallet reads, and network/server shutdown/restart recovery. Existing `verify-service-errors.cjs` and `verify-phase6.cjs` pass (234 API assertions plus service/auth/profile/location regressions). Android/iOS export, online Expo dependency validation and Expo Doctor (20/20) pass. JavaScript parsing and `git diff --check` pass. Initial PowerShell `npx.ps1` and restricted-network attempts failed; `.cmd` commands and network-enabled read-only checks succeeded. See [Phase 8 implementation and verification report](PHASE_8_VERIFICATION.md) for files, queries and pending phone tests.
+
+**Acceptance status:** Implemented for the current seeded catalog; final Phase 8 acceptance remains pending physical Expo Go checks, including visual layout, input focus, navigation/back, background/resume, phone connectivity and Phase 7 UI regressions. Populated sizes/extras are neither implemented nor verified because their backend contract remains undefined. No commit was created. Complete this checkpoint before starting Phase 9.
+
 **Main tasks**
 
 1. Implement `catalogService.js`, `HomeScreen.js`, `StoreScreen.js`, and `ProductDetailsScreen.js` using the planned reusable components.
@@ -212,11 +220,11 @@ This plan follows the original _CampusGo – Antonine Campus Delivery Applicatio
 
 **Verification checklist**
 
-- [ ] All four stores and seeded products are visible; filtering/search work.
-- [ ] Closed stores and out-of-stock products are clearly identified.
-- [ ] Product options and quantity controls behave correctly.
-- [ ] Changing PocketBase sample data changes the app after refresh.
-- [ ] Lists use `FlatList`; network failure displays an error instead of crashing.
+- [x] Services return all four stores/25 products; combined search/filter logic passes automated checks. Visual phone check pending.
+- [x] Closed-store calculation and out-of-stock visibility pass automated checks; UI indicators implemented. Phone check pending.
+- [ ] Product options and quantity controls confirmed on device. Current empty options and quantity limits pass logic checks; populated options need a defined contract.
+- [x] Backend changes are returned on fresh service calls; screens refetch on focus and refresh. Phone refresh check pending.
+- [x] Catalog/chip/grouped-product views use `FlatList`; network failure/recovery and health checks pass service tests. Phone error/retry check pending.
 
 **Proceed when:** Catalog browsing is stable without local hard-coded replacement datasets.
 
